@@ -257,10 +257,11 @@ export class TNS_SnackbarBaseCallback extends Snackbar_Namespace
 
   onDismissed(snackbar: any, event: number) {
     // if the dismiss was not caused by the action button click listener
+    let owner = this._owner.get();
     if (event !== 1) {
       this.resolve({
         command: 'Dismiss',
-        reason: this._owner.get()._getReason(event),
+        reason: owner ? owner._getReason(event) : DismissReasons.UNKNOWN,
         event: event
       });
     }
